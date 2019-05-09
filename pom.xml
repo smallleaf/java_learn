@@ -14,6 +14,7 @@
       <module>googleguice</module>
     <module>hadoop-log</module>
       <module>kafaka</module>
+      <module>netty</module>
   </modules>
 
   <name>learn-project</name>
