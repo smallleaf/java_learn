@@ -5,16 +5,22 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class TimeServerHandler extends ChannelInboundHandlerAdapter {
+public class TimeClientHanlder extends ChannelInboundHandlerAdapter {
 
 
-    public TimeServerHandler() {
 
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        super.channelRegistered(ctx);
     }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        super.channelActive(ctx);
+
+        byte[] bytes = "Ping...".getBytes();
+        ByteBuf byteBuf = Unpooled.buffer(bytes.length);
+        byteBuf.writeBytes(bytes);
+        ctx.writeAndFlush(byteBuf);
     }
 
     @Override
@@ -24,13 +30,11 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        ByteBuf buf = (ByteBuf) msg;
-        byte[] req = new byte[buf.readableBytes()];
-        buf.readBytes(req);
-        String body = new String(req,"utf-8");
-        System.out.println("server:"+body);
-        ByteBuf resp = Unpooled.copiedBuffer("pong...".getBytes());
-        ctx.writeAndFlush(resp);
+        ByteBuf byteBuf = (ByteBuf) msg;
+        byte[] reqs = new byte[byteBuf.readableBytes()];
+        byteBuf.readBytes(reqs);
+        String body = new String(reqs,"utf-8");
+        System.out.println("from server:"+body);
     }
 
     @Override
@@ -40,9 +44,6 @@ public class TimeServerHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        System.out.println("====发生异常，客户端主动关闭连接");
-        ctx.close();
+        super.exceptionCaught(ctx, cause);
     }
-
-
 }
