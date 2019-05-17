@@ -24,8 +24,10 @@ public class PingClient {
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        socketChannel.pipeline().addLast(new TimeClientHanlder()).addLast(new IdleStateHandler(10,0,0))
-                        .addLast(new HeartbeatCLientHandler());
+                        socketChannel.pipeline()
+                                .addLast(new IdleStateHandler(0,4,0))
+                                .addLast(new TimeClientHanlder())
+                                .addLast(new HeartbeatCLientHandler());
                     }
                 });
         try {
