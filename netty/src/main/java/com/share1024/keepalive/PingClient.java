@@ -1,7 +1,6 @@
 package com.share1024.keepalive;
 
 import com.share1024.keepalive.handler.HeartbeatCLientHandler;
-import com.share1024.keepalive.handler.HeartbeatServerHandler;
 import com.share1024.keepalive.handler.TimeClientHanlder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -42,5 +41,6 @@ public class PingClient {
 
     public static void main(String[] args) {
         new PingClient().connect("localhost",8080);
-        }
-        }
+
+    }
+}

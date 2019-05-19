@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package pb;
+
+option java_package = "com.share1024.serialization.protobuf";
+
+option java_outer_classname = "SubScribeReq";
+
+message SubReq{
+    int32 subReqId = 1;
+
+}
