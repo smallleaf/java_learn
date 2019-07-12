@@ -15,6 +15,7 @@
     <module>hadoop-log</module>
       <module>kafaka</module>
       <module>netty</module>
+      <module>es</module>
   </modules>
 
   <name>learn-project</name>
