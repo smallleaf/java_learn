@@ -20,5 +20,6 @@ public class UpdateDemo {
         UpdateRequest updateRequest = new UpdateRequest();
         updateRequest.index(INDEX);
         updateRequest.type(TYPE);
+
     }
 }
