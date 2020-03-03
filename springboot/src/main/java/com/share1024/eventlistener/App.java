@@ -1,9 +1,11 @@
-package com.share1024;
+package com.share1024.eventlistener;
 
-import com.share1024.eventlistener.ConsumerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
-@SpringBootApplication
+@SpringBootConfiguration
+@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
+@EnableAspectJAutoProxy
 @RestController
-public class SpringbootApplication {
+@ComponentScan(basePackages = {"com.share1024.eventlistener"})
+public class App {
 
 
 	@Autowired
@@ -27,6 +32,6 @@ public class SpringbootApplication {
     	return test;
 	}
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootApplication.class, args);
+		SpringApplication.run(App.class, args);
 	}
 }
