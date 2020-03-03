@@ -2,6 +2,7 @@ package com.share1024.ioc.life;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,7 @@ public class Person implements BeanFactoryAware, BeanNameAware,ApplicationContex
 
 
     public Person() {
-        System.out.println("=======6.【构造器】调用Person的构造器实例化");
+        System.out.println("============调用Person的构造器实例化");
     }
 
     public String getName() {
@@ -63,7 +64,7 @@ public class Person implements BeanFactoryAware, BeanNameAware,ApplicationContex
         return "Person [address=" + address + ", name=" + name + ", phone="
                 + phone + "]";
     }
-
+@Autowired
     // 这是BeanFactoryAware接口方法
     public void setBeanFactory(BeanFactory arg0) throws BeansException {
         System.out
@@ -80,18 +81,18 @@ public class Person implements BeanFactoryAware, BeanNameAware,ApplicationContex
     // 这是InitializingBean接口方法
     public void afterPropertiesSet() throws Exception {
         System.out
-                .println("【InitializingBean接口】调用InitializingBean.afterPropertiesSet()");
+                .println("============【InitializingBean接口】调用InitializingBean.afterPropertiesSet()");
     }
 
     // 这是DiposibleBean接口方法
     public void destroy() throws Exception {
-        System.out.println("【DiposibleBean接口】调用DiposibleBean.destory()");
+        System.out.println("============【DiposibleBean接口】调用DiposibleBean.destory()");
     }
 
     // 通过<bean>的init-method属性指定的初始化方法
     @PostConstruct
     public void myInit() {
-        System.out.println("【init-method】调用<bean>的init-method属性指定的初始化方法");
+        System.out.println("============【init-method】调用<bean>的init-method属性指定的初始化方法");
     }
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {

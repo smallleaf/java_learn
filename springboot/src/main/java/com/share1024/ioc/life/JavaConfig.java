@@ -10,7 +10,7 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
  * @Description :
  * @Date : 2018/11/16
  */
-@Configuration
+//@Configuration
 public class JavaConfig {
 
 

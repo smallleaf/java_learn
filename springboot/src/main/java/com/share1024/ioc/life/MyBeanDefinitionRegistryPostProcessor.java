@@ -14,18 +14,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class MyBeanDefinitionRegistryPostProcessor implements BeanDefinitionRegistryPostProcessor {
     public MyBeanDefinitionRegistryPostProcessor(){
-        System.out.println("============MyBeanDefinitionRegistryPostProcessor 构造器");
+        System.out.println("============1.初始化MyBeanDefinitionRegistryPostProcessor 构造器=========");
     }
 
     @Override
     public void postProcessBeanDefinitionRegistry(BeanDefinitionRegistry registry) throws BeansException {
-        System.out.println("============MyBeanDefinitionRegistryPostProcessor postProcessBeanDefinitionRegistry");
+        System.out.println("============2.BeanDefinitionRegistryPostProcessor postProcessBeanDefinitionRegistry=====");
 
     }
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-        System.out.println("============MyBeanDefinitionRegistryPostProcessor postProcessBeanFactory");
+        System.out.println("============3.MyBeanDefinitionRegistryPostProcessor postProcessBeanFactory");
 
     }
 }
