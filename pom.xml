@@ -16,6 +16,7 @@
       <module>kafaka</module>
       <module>netty</module>
       <module>es</module>
+      <module>taf</module>
   </modules>
 
   <name>learn-project</name>
