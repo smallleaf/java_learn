@@ -1,7 +1,5 @@
-package com.share1024.keepalive;
+package com.share1024.demo.helloworld;
 
-import com.share1024.keepalive.handler.TimeClient2Hanlder;
-import com.share1024.keepalive.handler.TimeClientHanlder;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -10,30 +8,32 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.timeout.IdleStateHandler;
 
-public class PingClient {
+/**
+ * \* @Author: yesheng
+ * \* Date: 2020/9/16 16:42
+ * \* Description:
+ * \
+ */
+public class BitClient {
 
     public void connect(String host,int port){
         EventLoopGroup group = new NioEventLoopGroup();
-
         Bootstrap bootstrap = new Bootstrap();
-        bootstrap.group(group).channel(NioSocketChannel.class)
+        bootstrap.group(group)
+                .channel(NioSocketChannel.class)
                 .option(ChannelOption.TCP_NODELAY,true)
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
-                    protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        socketChannel.pipeline()
-                                .addLast(new IdleStateHandler(0,4,0))
-                                .addLast(new TimeClientHanlder())
-//                                .addLast(new TimeClient2Hanlder())
-//                                .addLast(new HeartbeatCLientHandler())
-                        ;
+                    protected void initChannel(SocketChannel ch) throws Exception {
+                            ch.pipeline().addLast(new BitClientHandler());
                     }
                 });
+
         try {
-            ChannelFuture f = bootstrap.connect(host, port).sync();
-            f.channel().closeFuture().sync();
+            ChannelFuture ch = bootstrap.connect(host, port).sync();
+            System.out.println("client start success");
+            ch.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
@@ -42,7 +42,6 @@ public class PingClient {
     }
 
     public static void main(String[] args) {
-        new PingClient().connect("localhost",8080);
-
+        new BitClient().connect("localhost",8080);
     }
 }

@@ -1,8 +1,10 @@
 package com.share1024.keepalive;
 
 import com.share1024.keepalive.handler.ChildChannelHandler;
+import com.share1024.keepalive.handler.ChildChannelHandler2;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -18,7 +20,7 @@ public class PongServer {
         bootstrap.group(bossGroup,workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .option(ChannelOption.SO_BACKLOG,1024)
-                    .childHandler(new ChildChannelHandler());
+        .childHandler(new ChildChannelHandler2());
 
         try {
             ChannelFuture f = bootstrap.bind(port).sync();

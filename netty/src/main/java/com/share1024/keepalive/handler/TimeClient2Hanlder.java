@@ -5,7 +5,7 @@ import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 
-public class TimeClientHanlder extends ChannelInboundHandlerAdapter {
+public class TimeClient2Hanlder extends ChannelInboundHandlerAdapter {
 
 
 
@@ -17,12 +17,11 @@ public class TimeClientHanlder extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-
         byte[] bytes = "Ping...".getBytes();
         ByteBuf byteBuf = Unpooled.buffer(bytes.length);
         byteBuf.writeBytes(bytes);
         ctx.writeAndFlush(byteBuf);
-        ctx.fireChannelActive();
+        super.channelActive(ctx);
     }
 
     @Override
@@ -38,7 +37,7 @@ public class TimeClientHanlder extends ChannelInboundHandlerAdapter {
         byteBuf.readBytes(reqs);
         String body = new String(reqs,"utf-8");
         System.out.println("from server:"+body);
-        ctx.fireChannelActive();
+        ctx.fireChannelRead(msg);
     }
 
     @Override
