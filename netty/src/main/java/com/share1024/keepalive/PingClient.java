@@ -1,5 +1,6 @@
 package com.share1024.keepalive;
 
+import com.share1024.keepalive.handler.HeartbeatCLientHandler;
 import com.share1024.keepalive.handler.TimeClient2Hanlder;
 import com.share1024.keepalive.handler.TimeClientHanlder;
 import io.netty.bootstrap.Bootstrap;
@@ -26,8 +27,8 @@ public class PingClient {
                         socketChannel.pipeline()
                                 .addLast(new IdleStateHandler(0,4,0))
                                 .addLast(new TimeClientHanlder())
-//                                .addLast(new TimeClient2Hanlder())
-//                                .addLast(new HeartbeatCLientHandler())
+                                .addLast(new TimeClient2Hanlder())
+                                .addLast(new HeartbeatCLientHandler())
                         ;
                     }
                 });

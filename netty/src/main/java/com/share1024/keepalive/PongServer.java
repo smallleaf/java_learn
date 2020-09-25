@@ -1,10 +1,8 @@
 package com.share1024.keepalive;
 
-import com.share1024.keepalive.handler.ChildChannelHandler;
 import com.share1024.keepalive.handler.ChildChannelHandler2;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;

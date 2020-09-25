@@ -1,4 +1,4 @@
-package com.share1024.demo.helloworld;
+package com.share1024.tcp;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -8,6 +8,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 
 /**
  * \* @Author: yesheng
@@ -40,9 +42,9 @@ public class BitServer {
                     @Override
                     protected void initChannel(SocketChannel ch) throws Exception {
                         //添加事件处理
-                        ch.pipeline().addLast(new JsonDecoder());
-                        ch.pipeline().addLast(new JsonEncoder());
-                        ch.pipeline().addLast(new BitServerJsonHandler());
+                        ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+                        ch.pipeline().addLast(new StringDecoder());
+                        ch.pipeline().addLast(new BitServerHandler());
                     }
                 });
         try {

@@ -37,4 +37,10 @@ public class BitClientHandler extends ChannelInboundHandlerAdapter {
         System.out.println("client read complete");
         super.channelReadComplete(ctx);
     }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("=============channelInactive===========");
+        super.channelInactive(ctx);
+    }
 }
