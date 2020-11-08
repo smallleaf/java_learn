@@ -1,13 +1,13 @@
-package com.share1024.transaction.demo01;
-
-import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+package com.share1024.transaction.demo03;
 
 import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
+
+import com.alibaba.druid.pool.DruidDataSource;
 
 /**
  * @author : yesheng
@@ -15,7 +15,7 @@ import javax.sql.DataSource;
  * @Date : 2018-12-25
  */
 @Configuration
-@ComponentScan("com.share1024.transaction.demo01")
+@EnableTransactionManagement
 public class JavaConfig {
 
     @Bean
@@ -28,16 +28,11 @@ public class JavaConfig {
         return dataSource;
     }
 
-
-    @Bean
-    public DataSourceTransactionManager transactionManager(){
-        return new DataSourceTransactionManager(dataSource());
-    }
-
-
     @Bean
     public JdbcTemplate jdbcTemplate(){
         return new JdbcTemplate(dataSource());
     }
+
+
 
 }

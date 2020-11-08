@@ -31,9 +31,9 @@ public class JavaConfig {
     public DataSource dataSource(){
         DruidDataSource dataSource = new DruidDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://172.16.168.200:3306/share1024");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/test");
         dataSource.setUsername("root");
-        dataSource.setPassword("yesheng");
+        dataSource.setPassword("123456");
         return dataSource;
     }
 
@@ -47,13 +47,6 @@ public class JavaConfig {
     @Bean
     public JdbcTemplate jdbcTemplate(){
         return new JdbcTemplate(dataSource());
-    }
-
-
-    @Bean
-    public TransactionAttributeSourceAdvisor advisor(){
-        TransactionAttributeSourceAdvisor transactionAttributeSourceAdvisor = new TransactionAttributeSourceAdvisor();
-        return transactionAttributeSourceAdvisor;
     }
 
 

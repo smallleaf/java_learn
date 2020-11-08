@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
             transactionManager.commit(transactionStatus);
         }catch (Exception e){
             transactionManager.rollback(transactionStatus);
+            e.printStackTrace();
         }
 
     }

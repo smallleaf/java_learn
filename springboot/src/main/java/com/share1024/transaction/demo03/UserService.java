@@ -1,6 +1,4 @@
-package com.share1024.transaction.demo02;
-
-import org.springframework.transaction.annotation.Transactional;
+package com.share1024.transaction.demo03;
 
 /**
  * @author : yesheng

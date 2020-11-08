@@ -1,4 +1,4 @@
-package com.share1024.transaction.demo02;
+package com.share1024.transaction.demo03;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,6 +16,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+
+    @Transactional
     @Override
     public void save() {
         String sql = "insert into user (username,password) values('yesheng','hahah22')";
