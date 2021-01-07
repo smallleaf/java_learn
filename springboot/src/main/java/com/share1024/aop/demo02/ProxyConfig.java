@@ -24,29 +24,29 @@ public class ProxyConfig {
         return new CustomBeforeAdvice();
     }
 
-    @Bean
-    public JdkRegexpMethodPointcut queryPointcut(){
-        JdkRegexpMethodPointcut pointcut = new JdkRegexpMethodPointcut();
-        pointcut.setPattern("say.*");
-        return pointcut;
-    }
-
-    @Bean
-    public DefaultPointcutAdvisor queryAdvisor(){
-        DefaultPointcutAdvisor queryAdvisor = new DefaultPointcutAdvisor();
-        queryAdvisor.setPointcut(Pointcut.TRUE);
-        queryAdvisor.setAdvice(customBeforeAdvice());
-        return queryAdvisor;
-    }
-
-
-    @Bean
-    public RegexpMethodPointcutAdvisor regexpMethodPointcutAdvisor(){
-        RegexpMethodPointcutAdvisor regexpMethodPointcutAdvisor = new RegexpMethodPointcutAdvisor();
-        regexpMethodPointcutAdvisor.setPattern("say.*");
-        regexpMethodPointcutAdvisor.setAdvice(customBeforeAdvice());
-        return regexpMethodPointcutAdvisor;
-    }
+//    @Bean
+//    public JdkRegexpMethodPointcut queryPointcut(){
+//        JdkRegexpMethodPointcut pointcut = new JdkRegexpMethodPointcut();
+//        pointcut.setPattern("say.*");
+//        return pointcut;
+//    }
+//
+//    @Bean
+//    public DefaultPointcutAdvisor queryAdvisor(){
+//        DefaultPointcutAdvisor queryAdvisor = new DefaultPointcutAdvisor();
+//        queryAdvisor.setPointcut(Pointcut.TRUE);
+//        queryAdvisor.setAdvice(customBeforeAdvice());
+//        return queryAdvisor;
+//    }
+//
+//
+//    @Bean
+//    public RegexpMethodPointcutAdvisor regexpMethodPointcutAdvisor(){
+//        RegexpMethodPointcutAdvisor regexpMethodPointcutAdvisor = new RegexpMethodPointcutAdvisor();
+//        regexpMethodPointcutAdvisor.setPattern("say.*");
+//        regexpMethodPointcutAdvisor.setAdvice(customBeforeAdvice());
+//        return regexpMethodPointcutAdvisor;
+//    }
     @Bean
     public ProxyFactoryBean manProxy(Person man){
         ProxyFactoryBean proxyFactoryBean = new ProxyFactoryBean();

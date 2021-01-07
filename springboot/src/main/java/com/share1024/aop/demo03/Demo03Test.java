@@ -18,6 +18,6 @@ public class Demo03Test {
 
     @PostConstruct
     public void init(){
-//        person.say();
+        person.say();
     }
 }
