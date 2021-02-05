@@ -18,6 +18,7 @@
       <module>es</module>
       <module>taf</module>
       <module>sentinel</module>
+      <module>druid</module>
   </modules>
 
   <name>learn-project</name>
