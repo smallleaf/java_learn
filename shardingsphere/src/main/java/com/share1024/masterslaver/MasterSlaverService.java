@@ -18,7 +18,6 @@ public class MasterSlaverService {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    @PostConstruct
     public void init(){
         addData();
         queryData();
