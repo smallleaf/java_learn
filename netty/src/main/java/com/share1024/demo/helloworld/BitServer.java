@@ -8,6 +8,10 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * \* @Author: yesheng
@@ -48,9 +52,16 @@ public class BitServer {
         try {
             //绑定端口等待服务启动完毕
             ChannelFuture ch = bootstrap.bind(port).sync();
+            ch.addListener(new GenericFutureListener<Future<? super Void>>() {
+                @Override
+                public void operationComplete(Future<? super Void> future) throws Exception {
+                    System.out.println("+=1");
+                }
+            });
             System.out.println("Bit Server start port :" + port);
             //阻塞，等待服务端链路关闭之后main才能退出，服务在此就已经启动。
             ch.channel().closeFuture().sync();
+            System.out.println("===");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {

@@ -2,8 +2,11 @@ package com.share1024.demo.helloworld;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 
 /**
  * \* @Author: yesheng
@@ -16,7 +19,15 @@ public class BitClientHandler extends ChannelInboundHandlerAdapter {
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         String data = "hello server i am bit client 1";
         ByteBuf byteBuf = Unpooled.wrappedBuffer(data.getBytes());
-        ctx.writeAndFlush(byteBuf);
+        ChannelFuture channelFuture =  ctx.writeAndFlush(byteBuf);
+        channelFuture.addListener(new GenericFutureListener<Future<? super Void>>() {
+            @Override
+            public void operationComplete(Future<? super Void> future) throws Exception {
+                System.out.println("actice success===="+future.isSuccess());
+
+            }
+        });
+        System.out.println("====1");
         super.channelActive(ctx);
     }
 

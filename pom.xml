@@ -12,13 +12,11 @@
     <module>rabbitmq</module>
       <module>dubbo</module>
       <module>googleguice</module>
-    <module>hadoop-log</module>
       <module>kafaka</module>
       <module>netty</module>
       <module>es</module>
       <module>taf</module>
       <module>sentinel</module>
-      <module>druid</module>
   </modules>
 
   <name>learn-project</name>

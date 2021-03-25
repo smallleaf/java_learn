@@ -12,6 +12,21 @@ import io.netty.channel.ChannelInboundHandlerAdapter;
  */
 public class BitServerJsonHandler extends ChannelInboundHandlerAdapter {
 
+    @Override
+    public void channelActive(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("====");
+        super.channelActive(ctx);
+    }
+
+    @Override
+    public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+        System.out.println("===channelRegistered===");
+        super.channelRegistered(ctx);
+    }
+
+
+
+
     Gson gson = new Gson();
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
