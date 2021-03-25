@@ -15,13 +15,13 @@ import java.time.Duration;
 public class LettuceTest {
 
     public static void main(String[] args) {
-        RedisClient redisClient = RedisClient.create("redis://9iedyIcX51v109MX@m2-3379-gznx-InteractiveGameTest-dev.redis.imdmx.com:3379/0");
+        RedisClient redisClient = RedisClient.create("redis://localhost:3379/0");
         redisClient.setDefaultTimeout(Duration.ofSeconds(10000));
         StatefulRedisConnection<String, String> redisConnection = redisClient.connect();
         RedisCommands<String,String> commands = redisConnection.sync();
-        commands.set("test","hello world");
-        System.out.println(commands.get("test"));
-        commands.del("test");
+        commands.zadd("test",System.currentTimeMillis(),"test");
+        System.out.println(commands.zrank("test","test"));
+        System.out.println(commands.zrank("test","test2"));
         redisConnection.close();
         redisClient.shutdown();
     }
