@@ -1,4 +1,4 @@
-package com.share1024.java.jvm;
+package com.share1024.java.jvm.init;
 
 /**
  * @author : yesheng
@@ -34,6 +34,8 @@ package com.share1024.java.jvm;
 5.        say();
 
 
+=========================================
+
  * @Date : 2018/12/13
  */
 public class JvmTest {
@@ -42,14 +44,18 @@ public class JvmTest {
         say();
     }
 
+    /**
+     * 先会进行初始化，这个阶段是Clinit初始化阶段，所以会直接进行new JvmTest() 也就是成员变量，构造函数
+     */
     static  JvmTest jvmTest = new JvmTest();
 
     static {
         System.out.println(1);
     }
+    int a = 100;
 
     {
-        System.out.println(2);
+        System.out.println(2 + "a:"+a);
     }
 
     JvmTest(){
@@ -58,12 +64,11 @@ public class JvmTest {
 
     }
 
-    int a = 100;
     static int b = 112;
 
 
     public static void say(){
-        System.out.println("i am say");
+        System.out.println("i am say"+b);
     }
 
 }
