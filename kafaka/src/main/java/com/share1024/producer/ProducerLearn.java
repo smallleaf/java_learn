@@ -31,13 +31,13 @@ public class ProducerLearn {
         /**
          * 集群逗号配置多个
          */
-        kafakaProperties.put("bootstrap.servers","172.16.168.200:9092");
+        kafakaProperties.put("bootstrap.servers","localhost:9092");
         kafakaProperties.put("key.serializer", StringSerializer.class.getName());
         kafakaProperties.put("value.serializer","org.apache.kafka.common.serialization.StringSerializer");
 
         KafkaProducer producer = new KafkaProducer(kafakaProperties);
 
-        ProducerRecord<String,String> record = new ProducerRecord<String,String>(TOPIC,"xxxxxx");
+        ProducerRecord<String,String> record = new ProducerRecord<String,String>(TOPIC,"hahah");
 
         producer.send(record,new ProducerCallBack());
 

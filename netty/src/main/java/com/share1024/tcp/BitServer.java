@@ -10,6 +10,8 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LineBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
+import io.netty.util.concurrent.Future;
+import io.netty.util.concurrent.GenericFutureListener;
 
 /**
  * \* @Author: yesheng
@@ -52,6 +54,12 @@ public class BitServer {
             ChannelFuture ch = bootstrap.bind(port).sync();
             System.out.println("Bit Server start port :" + port);
             //阻塞，等待服务端链路关闭之后main才能退出，服务在此就已经启动。
+            ch.addListener(new GenericFutureListener<Future<? super Void>>() {
+                @Override
+                public void operationComplete(Future<? super Void> future) throws Exception {
+
+                }
+            });
             ch.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
