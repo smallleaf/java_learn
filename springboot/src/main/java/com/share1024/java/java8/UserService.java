@@ -15,4 +15,9 @@ public interface UserService {
     static void sayStatic(){
         System.out.println("iam static");
     }
+
+
+    void player(PlayerAction playerAction);
+
+    String test2();
 }
