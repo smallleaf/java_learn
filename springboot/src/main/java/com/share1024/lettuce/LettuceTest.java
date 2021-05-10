@@ -1,6 +1,8 @@
 package com.share1024.lettuce;
 
 import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
+import io.lettuce.core.ScriptOutputType;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
 import io.lettuce.core.cluster.RedisClusterClient;
@@ -28,6 +30,29 @@ public class LettuceTest {
         System.out.println(commands.zrank("test","test2"));
         redisConnection.close();
         redisClient.shutdown();
+    }
+
+    @Test
+    public void testLua(){
+        RedisURI redisURI =
+                RedisURI.builder().withHost("m2-3379-gznx-InteractiveGameTest-dev.redis.imdmx.com").withPort(3379).withPassword("9iedyIcX51v109MX").build();
+        RedisClient redisClient = RedisClient.create(redisURI);
+        redisClient.setDefaultTimeout(Duration.ofSeconds(10000));
+        StatefulRedisConnection<String, String> redisConnection = redisClient.connect();
+        RedisCommands<String,String> commands = redisConnection.sync();
+        String script = "local key=KEYS[1]\n" +
+                "local timeOut = ARGV[1]\n" +
+                "\n" +
+                "if redis.call(\"EXISTS\",key) == 0 then\n" +
+                "\tredis.call(\"SET\",key,key)\n" +
+                "\tredis.call(\"expire\",key,timeOut)\n" +
+                "\treturn true\n" +
+                "end\n" +
+                "return false\n";
+        String scriptSha = commands.scriptLoad(script);
+        System.out.println(scriptSha);
+        boolean result = commands.evalsha(scriptSha, ScriptOutputType.BOOLEAN,new String[]{"test"},"100");
+        System.out.println(result);
     }
 
     @Test
