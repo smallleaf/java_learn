@@ -25,7 +25,7 @@ public class SubClass extends ParentClass{
     }
 
     public static void main(String[] args) {
-        new JvmTest();
+        new SubClass();
     }
 
 }

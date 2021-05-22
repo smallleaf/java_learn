@@ -1,14 +1,15 @@
 package com.share1024.java.java8;
 
-import org.junit.Assert;
 import org.junit.Test;
 
-import java.sql.SQLOutput;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.File;
+import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  * @author : yesheng
@@ -17,11 +18,14 @@ import java.util.function.Predicate;
  */
 public class UserServiceImpl implements UserService {
 
-    public static void main(String[] args) {
-        UserServiceImpl user = new UserServiceImpl();
-        user.say();
-        UserService.sayStatic();
+    private int i = 10;
 
+    public int getI() {
+        return i;
+    }
+
+    public void setI(int i) {
+        this.i = i;
     }
 
     @Test
@@ -50,5 +54,27 @@ public class UserServiceImpl implements UserService {
 
         List<String> test = new ArrayList<>();
 
+    }
+
+    @Override
+    public void say() {
+
+    }
+
+    @Override
+    public void player(PlayerAction playerAction) {
+        System.out.println("i am player "+playerAction.player(this));
+    }
+
+    @Override
+    public String test2() {
+        return "test2";
+    }
+
+
+    public static void main(String[] args) {
+        Optional<UserServiceImpl> userService = Optional.of(new UserServiceImpl());
+        userService.get().setI(100);
+        System.out.println(userService.get().getI());
     }
 }
