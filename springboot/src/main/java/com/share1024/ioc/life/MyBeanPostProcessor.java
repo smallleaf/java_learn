@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 //@Component
 public class MyBeanPostProcessor implements BeanPostProcessor {
 
+
     public MyBeanPostProcessor() {
         super();
         System.out.println("============6.这是BeanPostProcessor实现类构造器！！");

@@ -33,7 +33,7 @@ public class LettuceTest {
     @Test
     public void  testCluster(){
         RedisClusterClient redisClient = RedisClusterClient.create("redis://localhost:7000,localhost:7001,localhost:7002");
-        StatefulRedisClusterConnection<String, String>  redisClusterConnection = redisClient.connect();
+        StatefulRedisClusterConnection<String, String> redisClusterConnection = redisClient.connect();
         RedisAdvancedClusterCommands<String,String> commands = redisClusterConnection.sync();
         commands.set("yesheng","哈哈哈");
         System.out.println(commands.get("yesheng"));
