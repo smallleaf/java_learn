@@ -8,4 +8,6 @@ package com.share1024.transaction.demo03;
 public interface UserService {
 
     void save();
+    void save3();
+    void save2();
 }
