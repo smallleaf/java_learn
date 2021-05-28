@@ -18,17 +18,12 @@ public class UserServiceImpl implements UserService {
     private JdbcTemplate jdbcTemplate;
 
 
-    @Transactional
     @Override
     public void save() {
-        save2();
-        try {
-            save3();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        String sql = "insert into user (username,password) values('yesheng','hahah33')";
+        jdbcTemplate.execute(sql);
+        int  i = 5/0;
     }
-    @Transactional(propagation = Propagation.NEVER)
     @Override
     public void save3() {
         try {

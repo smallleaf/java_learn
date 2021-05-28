@@ -5,6 +5,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.context.event.EventListener;
 
 import javax.annotation.PostConstruct;
 
@@ -14,12 +17,15 @@ import javax.annotation.PostConstruct;
  * @Date : 2018-12-25
  */
 @SpringBootApplication
+@EnableAspectJAutoProxy
 public class App {
 
     @Autowired
     private UserService userService;
 
-    @PostConstruct
+
+
+    @EventListener(ContextRefreshedEvent.class)
     public void init(){
         userService.save();
     }
