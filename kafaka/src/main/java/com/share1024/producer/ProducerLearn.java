@@ -7,6 +7,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 import org.apache.kafka.common.serialization.StringSerializer;
 
 import java.util.Properties;
+import java.util.concurrent.*;
 
 /**
  * @author : yesheng
@@ -15,10 +16,13 @@ import java.util.Properties;
  */
 public class ProducerLearn {
 
+    public final Integer id = 1;
 
-
+    class Test{
+       int id = ProducerLearn.this.id;
+    }
     private static final String TOPIC = "testJava";
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ExecutionException, InterruptedException {
         Properties kafakaProperties = new Properties();
         //设置broker地址
 
@@ -37,7 +41,7 @@ public class ProducerLearn {
 
         KafkaProducer producer = new KafkaProducer(kafakaProperties);
 
-        ProducerRecord<String,String> record = new ProducerRecord<String,String>(TOPIC,"hahah");
+        ProducerRecord<String,String> record = new ProducerRecord<String,String>(TOPIC,"hahah","test");
 
         producer.send(record,new ProducerCallBack());
 
