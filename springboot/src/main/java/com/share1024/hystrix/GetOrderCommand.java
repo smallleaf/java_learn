@@ -30,12 +30,13 @@ public class GetOrderCommand extends HystrixCommand<String> {
 
     @Override
     protected String run() throws Exception {
+        System.out.println(Thread.currentThread().getName());
         return "hhehehe";
     }
 
 
     public static void main(String[] args) {
-        String name =  new GetOrderCommand("test").execute();
+        String name =  new GetOrderCommand("yesheng").execute();
         System.out.println(name);
     }
 }
