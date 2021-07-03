@@ -35,7 +35,7 @@ public class LettuceTest {
     @Test
     public void testLua(){
         RedisURI redisURI =
-                RedisURI.builder().withHost("m2-3379-gznx-InteractiveGameTest-dev.redis.imdmx.com").withPort(3379).withPassword("9iedyIcX51v109MX").build();
+                RedisURI.builder().withHost("").withPort(3379).withPassword("").build();
         RedisClient redisClient = RedisClient.create(redisURI);
         redisClient.setDefaultTimeout(Duration.ofSeconds(10000));
         StatefulRedisConnection<String, String> redisConnection = redisClient.connect();
