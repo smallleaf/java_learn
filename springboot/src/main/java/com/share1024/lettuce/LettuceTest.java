@@ -10,6 +10,8 @@ import io.lettuce.core.cluster.api.StatefulRedisClusterConnection;
 import io.lettuce.core.cluster.api.sync.RedisAdvancedClusterCommands;
 import org.junit.Test;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.time.Duration;
 
 /**
@@ -28,6 +30,60 @@ public class LettuceTest {
         commands.zadd("test",System.currentTimeMillis(),"test");
         System.out.println(commands.zrank("test","test"));
         System.out.println(commands.zrank("test","test2"));
+        redisConnection.close();
+        redisClient.shutdown();
+    }
+
+    @Test
+    public void testRank2(){
+        RedisClient redisClient = RedisClient.create("redis://localhost:6379");
+        redisClient.setDefaultTimeout(Duration.ofSeconds(10000));
+        StatefulRedisConnection<String, String> redisConnection = redisClient.connect();
+        RedisCommands<String,String> commands = redisConnection.sync();
+
+        //相同分数，时间晚的排在后面
+
+        String key ="rank";
+
+        long time1 = System.currentTimeMillis();
+
+        long time2 = time1 + 1000;
+
+        NumberFormat nf = NumberFormat.getInstance();
+        nf.setGroupingUsed(false);
+        String memer1 = nf.format(Math.pow(10,13) - time1) +":" +"u0000000000001";
+        String memer2 = nf.format(Math.pow(10,13) - time2) +":" +"u0000000000002";
+        commands.zadd(key,100,memer1);
+        commands.zadd(key,100,memer2);
+        redisConnection.close();
+        redisClient.shutdown();
+    }
+
+
+    @Test
+    public void testRank(){
+        RedisClient redisClient = RedisClient.create("redis://localhost:6379");
+        redisClient.setDefaultTimeout(Duration.ofSeconds(10000));
+        StatefulRedisConnection<String, String> redisConnection = redisClient.connect();
+        RedisCommands<String,String> commands = redisConnection.sync();
+
+        //相同分数，时间晚的排在后面
+
+        String key ="rank";
+
+        long time1 = System.currentTimeMillis();
+
+        long time2 = time1 + 1000;
+
+        double score = 9999;
+
+//        double score1 = score + (Math.pow(10,14) - (double)time1) / Math.pow(10,14);
+//        double score2 = score + (Math.pow(10,14) -(double)time2) / Math.pow(10,14);
+        double score1 = score * Math.pow(10,13) - time1;
+        double score2 = score * Math.pow(10,13) - time2;
+        commands.zadd(key,score1,"user1");
+
+        commands.zadd(key,score2,"user2");
         redisConnection.close();
         redisClient.shutdown();
     }
@@ -55,9 +111,14 @@ public class LettuceTest {
         System.out.println(result);
     }
 
+
+
+
+
+
     @Test
     public void  testCluster(){
-        RedisClusterClient redisClient = RedisClusterClient.create("redis://localhost:7000,localhost:7001,localhost:7002");
+        RedisClusterClient redisClient = RedisClusterClient.create("redis://127.0.0.1:7001");
         StatefulRedisClusterConnection<String, String> redisClusterConnection = redisClient.connect();
         RedisAdvancedClusterCommands<String,String> commands = redisClusterConnection.sync();
         commands.set("yesheng","哈哈哈");
