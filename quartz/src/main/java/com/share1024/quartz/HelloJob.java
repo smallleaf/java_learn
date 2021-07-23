@@ -32,6 +32,8 @@ public class HelloJob implements Job {
 
     }
 
+
+
     public void setTest(String test) {
         this.test = test;
     }
