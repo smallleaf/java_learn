@@ -12,14 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@ComponentScan(basePackages = "com.share1024.iocCircle")
+@ComponentScan(basePackages = "com.share1024.yml")
 public class SpringbootApplication {
-
-	@Autowired
-	private User user;
-
-	@Value("${spring.profiles.active}")
-	private String evn;
 
 	public static void main(String[] args) {
 		SpringApplication springApplication = new SpringApplication();

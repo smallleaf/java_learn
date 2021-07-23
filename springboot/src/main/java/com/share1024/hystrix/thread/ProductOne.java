@@ -4,6 +4,8 @@ import com.netflix.hystrix.HystrixCommandGroupKey;
 import com.netflix.hystrix.HystrixObservableCommand;
 import rx.Observable;
 
+import java.util.regex.Pattern;
+
 /**
  * \* @Author: yesheng
  * \* Date: 2021/6/21 11:13
@@ -22,5 +24,13 @@ public class ProductOne extends HystrixObservableCommand<String> {
             System.out.println(Thread.currentThread().getName());
             subscriber.onNext("ProductOne");
         });
+    }
+
+    public static void main(String[] args) {
+        long now = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            String test = "test:"+1;
+        }
+        System.out.println(System.currentTimeMillis() - now);
     }
 }
