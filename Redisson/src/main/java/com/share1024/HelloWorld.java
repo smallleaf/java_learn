@@ -22,7 +22,7 @@ public class HelloWorld {
     @Before
     public void before(){
         config.setTransportMode(TransportMode.NIO);
-        config.useSingleServer().setAddress("redis://m2-3379-gznx-InteractiveGameTest-dev.redis.imdmx.com:3379").setPassword("9iedyIcX51v109MX");
+        config.useSingleServer().setAddress("").setPassword("");
         config.setLockWatchdogTimeout(3000);
     }
 
