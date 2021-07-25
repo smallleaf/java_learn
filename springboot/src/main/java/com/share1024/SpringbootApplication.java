@@ -8,12 +8,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
 @RestController
-@ComponentScan(basePackages = "com.share1024.yml")
+@ComponentScan(basePackages = "com.share1024.redisson")
 public class SpringbootApplication {
 
 	public static void main(String[] args) {
 		SpringApplication springApplication = new SpringApplication();
-		springApplication.setWebApplicationType(WebApplicationType.NONE);
+		springApplication.setWebApplicationType(WebApplicationType.SERVLET);
 		springApplication.run(SpringbootApplication.class, args);
 	}
 }
