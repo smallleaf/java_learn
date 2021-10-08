@@ -1,6 +1,9 @@
 package com.share1024.hystrix;
 
 import com.netflix.hystrix.*;
+import rx.Subscriber;
+
+import java.io.IOException;
 
 /**
  * \* @Author: yesheng
@@ -36,7 +39,28 @@ public class GetOrderCommand extends HystrixCommand<String> {
 
 
     public static void main(String[] args) {
-        String name =  new GetOrderCommand("yesheng").execute();
-        System.out.println(name);
+//        String name =  new GetOrderCommand("yesheng").execute();
+//        System.out.println(name);
+        HystrixCommand hystrixCommand = new GetOrderCommand("yesheng");
+        Object result = hystrixCommand.execute();
+        System.out.println(result);
+
+        hystrixCommand.observe().subscribe(new Subscriber() {
+            @Override
+            public void onCompleted() {
+                System.out.println("==onCompleted==");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(Object o) {
+                System.out.println("===="+o);
+            }
+        });
+
     }
 }
