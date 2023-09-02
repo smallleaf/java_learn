@@ -17,6 +17,7 @@
       <module>es</module>
       <module>taf</module>
       <module>sentinel</module>
+      <module>pulsar</module>
   </modules>
 
   <name>learn-project</name>
