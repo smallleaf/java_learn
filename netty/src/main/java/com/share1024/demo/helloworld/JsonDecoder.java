@@ -18,6 +18,7 @@ public class JsonDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         byte[] data = new byte[in.readableBytes()];
         in.readBytes(data);
+        System.out.println(new String(data,"utf-8"));
         out.add(new String(data,"utf-8"));
     }
 }

@@ -8,6 +8,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.base64.Base64Decoder;
+import io.netty.handler.codec.base64.Base64Encoder;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 
@@ -46,6 +48,8 @@ public class BitServer {
                         //添加事件处理
                         ch.pipeline().addLast(new JsonDecoder());
                         ch.pipeline().addLast(new JsonEncoder());
+                        ch.pipeline().addLast(new Base64Encoder());
+                        ch.pipeline().addLast(new Base64Decoder());
                         ch.pipeline().addLast(new BitServerJsonHandler());
                     }
                 });

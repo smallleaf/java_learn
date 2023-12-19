@@ -39,12 +39,16 @@ public class PulsarConsumeTest {
                 .serviceUrl("pulsar://pulsar1:6650")
                 .build();
 
+        System.out.println("==2=");
+
         Consumer<byte[]> consumer = client.newConsumer()
                 .topic("video/flow/enterRoom")
                 .subscriptionName("consumer1")
                 .subscriptionType(SubscriptionType.Shared)
                 .subscriptionInitialPosition(SubscriptionInitialPosition.Latest)
                 .subscribe();
+
+        System.out.println("===");
 
         while(true){
             Message<byte[]> message = consumer.receive();

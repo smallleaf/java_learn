@@ -11,18 +11,15 @@ import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.base64.Base64Decoder;
 import io.netty.handler.codec.base64.Base64Encoder;
 
-import java.io.InputStream;
-
 /**
  * \* @Author: yesheng
  * \* Date: 2020/9/16 16:42
  * \* Description:
  * \
  */
-public class BitClient {
+public class BitClient2 {
 
     public void connect(String host,int port){
-        DataStream
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
         bootstrap.group(group)
@@ -61,6 +58,6 @@ public class BitClient {
     }
 
     public static void main(String[] args) {
-        new BitClient().connect("localhost",8080);
+        new BitClient2().connect("localhost",8080);
     }
 }
