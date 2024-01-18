@@ -8,15 +8,14 @@ import java.util.*;
 
 public class Consumer {
 
-    public int id = 1;
-
     public static void main(String[] args) {
         Properties kafakaProperties = new Properties();
-        kafakaProperties.put("bootstrap.servers","localhost:9092");
+        kafakaProperties.put("bootstrap.servers","172.16.9.24:9092");
         kafakaProperties.put("key.deserializer", StringDeserializer.class.getName());
         kafakaProperties.put("value.deserializer","org.apache.kafka.common.serialization.StringDeserializer");
 
-        kafakaProperties.put("group.id","test");
+        kafakaProperties.put("group.id","test3");
+        kafakaProperties.put("auto.offset.reset","earliest");
         kafakaProperties.put("auto.commit.offset",false);
         kafakaProperties.put("enable.auto.commit",false);
 

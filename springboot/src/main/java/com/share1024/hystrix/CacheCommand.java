@@ -32,6 +32,8 @@ public class CacheCommand extends HystrixCommand<String> {
     }
 
 
+
+
     public static void main(String[] args) {
 
         HystrixRequestContext hystrixRequestContext = HystrixRequestContext.initializeContext();
