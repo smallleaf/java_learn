@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE Chat Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .messages {
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            max-height: 200px;
+            overflow-y: auto;
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+<h1>Chat with SSE</h1>
+<form id="chat-form">
+    <label for="question">Your question:</label><br>
+    <input type="text" id="question" name="question" required>
+    <button type="submit">Send</button>
+</form>
+<div class="messages" id="messages"></div>
+
+<script>
+    document.getElementById('chat-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const question = document.getElementById('question').value;
+        document.getElementById('messages').innerHTML = `<p><b>You:</b> ${question}</p>`;
+
+        // Send question to server
+        fetch('http://localhost:8080/chat/ask', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `question=${encodeURIComponent(question)}`
+        }).then(() => {
+            // Connect to SSE endpoint
+            const eventSource = new EventSource('http://localhost:8080/chat/stream');
+            eventSource.onmessage = function (event) {
+                const messagesDiv = document.getElementById('messages');
+                const newMessage = `<p><b>Server:</b> ${event.data}</p>`;
+                messagesDiv.innerHTML += newMessage;
+                messagesDiv.scrollTop = messagesDiv.scrollHeight; // Auto-scroll to bottom
+            };
+            eventSource.onerror = function () {
+                eventSource.close();
+                console.error('Connection closed or error occurred.');
+            };
+        }).catch(error => console.error('Error:', error));
+    });
+</script>
+</body>
+</html>
