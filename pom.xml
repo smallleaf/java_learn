@@ -19,6 +19,7 @@
       <module>sentinel</module>
       <module>pulsar</module>
       <module>sse</module>
+    <module>ai</module>
   </modules>
 
   <name>learn-project</name>
